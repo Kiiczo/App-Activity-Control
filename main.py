@@ -38,7 +38,7 @@ def time_counting():
     if 'system' not in df.columns:
         df['system'] = 0
     else:
-        df['system'] = df['system'] + 1
+        df.loc[today, 'system'] += 1
 
 
 def save_data():
