@@ -43,6 +43,13 @@ def reports():
     bg_photo = ImageTk.PhotoImage(bg_image)
     canvas.itemconfig(bg_item, image=bg_photo)
 
+def apptimers():
+    global bg_photo
+    canvas.itemconfig("dashboard", state='hidden')
+    bg_image = Image.open("App Timers.png")
+    bg_photo = ImageTk.PhotoImage(bg_image)
+    canvas.itemconfig(bg_item, image=bg_photo)
+
 root = ctk.CTk()
 root.title("test")
 
@@ -54,9 +61,11 @@ canvas.pack()
 
 dashboard_button = ctk.CTkButton(root, text="Dashboard", fg_color="#21164A", width=250, height=50, command=dashboard)
 reports_button = ctk.CTkButton(root, text="Reports", fg_color="#21164A", width=250, height=50, command=reports)
+apptimers_button = ctk.CTkButton(root, text="App Timers", fg_color="#21164A", width=250, height=50, command=apptimers)
 
 canvas.create_window(130,400, window=dashboard_button)
 canvas.create_window(130,450, window=reports_button)
+canvas.create_window(130,500, window=apptimers_button)
 
 total_item = canvas.create_text(485, 195, text="", font=("Arial", 15), fill="white",tags='dashboard')
 apps_item = canvas.create_text(840, 195, text="", font=("Arial", 15), fill="white",tags='dashboard')
