@@ -40,6 +40,10 @@ def time_counting():
     else:
         df.loc[today, 'system'] += 1
 
+    if 'apps_amount' not in df.columns:
+        df['apps_amount'] = 0
+    else:
+        df.loc[today, 'apps_amount'] = len(apps)
 
 def save_data():
     df.to_csv("dane.csv")
