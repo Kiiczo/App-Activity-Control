@@ -40,7 +40,7 @@ class Ui_MainWindow(object):
         self.Dashboard = QLabel(self.central)
         self.Dashboard.setObjectName(u"Dashboard")
         self.Dashboard.setGeometry(QRect(0, 0, 1920, 1080))
-        self.Dashboard.setPixmap(QPixmap(u"Dashboard.png"))
+        self.Dashboard.setPixmap(QPixmap(u"Downloads/Dashboard.png"))
         self.dashboardBtn = QPushButton(self.central)
         self.dashboardBtn.setObjectName(u"dashboardBtn")
         self.dashboardBtn.setGeometry(QRect(30, 190, 271, 75))
@@ -56,9 +56,40 @@ class Ui_MainWindow(object):
         self.label.setStyleSheet(u"QLabel {\n"
 "    color: rgb(255, 255, 255);\n"
 "	font-size: 35px;\n"
+"    font-family: 'Inter';\n"
 "}\n"
 "")
         self.label.setLineWidth(2)
+        self.Applications = QLabel(self.central)
+        self.Applications.setObjectName(u"Applications")
+        self.Applications.setGeometry(QRect(400, 330, 921, 31))
+        self.Applications.setStyleSheet(u"QLabel {\n"
+"    color: rgb(255, 255, 255);\n"
+"	font-family: 'Inter';\n"
+"    background-color: rgba(33, 22, 74, 0);\n"
+"	font-size: 16px\n"
+"}\n"
+"\n"
+"QLabel:hover {\n"
+"	font-family: 'Inter';\n"
+"    background-color: rgb(56, 52, 132);\n"
+"    color: white;\n"
+"}\n"
+"")
+        self.AppScrollArea = QScrollArea(self.central)
+        self.AppScrollArea.setObjectName(u"AppScrollArea")
+        self.AppScrollArea.setGeometry(QRect(400, 360, 911, 621))
+        self.AppScrollArea.setStyleSheet(u"QScrollArea {\n"
+"    background-color: rgba(120, 255, 90,0);\n"
+"}")
+        self.AppScrollArea.setWidgetResizable(True)
+        self.AppScrollWidget = QWidget()
+        self.AppScrollWidget.setObjectName(u"AppScrollWidget")
+        self.AppScrollWidget.setGeometry(QRect(0, 0, 909, 619))
+        self.AppScrollWidget.setStyleSheet(u"QWidget {\n"
+"    background-color: rgba(0, 0, 0,0);\n"
+"}")
+        self.AppScrollArea.setWidget(self.AppScrollWidget)
         MainWindow.setCentralWidget(self.central)
 
         self.retranslateUi(MainWindow)
@@ -73,5 +104,6 @@ class Ui_MainWindow(object):
         self.reportsBtn.setText(QCoreApplication.translate("MainWindow", u"Reports", None))
         self.apptimersBtn.setText(QCoreApplication.translate("MainWindow", u"App Timers", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Loading", None))
+        self.Applications.setText(QCoreApplication.translate("MainWindow", u"Application", None))
     # retranslateUi
 
