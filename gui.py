@@ -94,6 +94,16 @@ class Ui_MainWindow(object):
 "}\n"
 "")
         self.AppsMonitored.setLineWidth(2)
+        self.MostUsedApp = QLabel(self.central)
+        self.MostUsedApp.setObjectName(u"MostUsedApp")
+        self.MostUsedApp.setGeometry(QRect(1515, 185, 271, 50))
+        self.MostUsedApp.setStyleSheet(u"QLabel {\n"
+"    color: rgb(255, 255, 255);\n"
+"	font-size: 35px;\n"
+"    font-family: 'Inter';\n"
+"}\n"
+"")
+        self.MostUsedApp.setLineWidth(2)
         MainWindow.setCentralWidget(self.central)
 
         self.retranslateUi(MainWindow)
@@ -110,5 +120,6 @@ class Ui_MainWindow(object):
         self.label.setText(QCoreApplication.translate("MainWindow", u"Loading", None))
         self.Applications.setText(QCoreApplication.translate("MainWindow", u"   Application                                                                                                                                                                    Today", None))
         self.AppsMonitored.setText(QCoreApplication.translate("MainWindow", u"Loading", None))
+        self.MostUsedApp.setText(QCoreApplication.translate("MainWindow", u"Loading", None))
     # retranslateUi
 

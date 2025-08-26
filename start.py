@@ -73,7 +73,10 @@ class MainWindow(QMainWindow):
             value = df.loc[today, "system"]
             value = sec_to_time(value)
             apps = df.loc[today, "apps_amount"]
+            maxApp = df.loc[today].idxmax()
             self.ui.label.setText(value)
+            self.ui.MostUsedApp.setText(str(maxApp))
+            print(maxApp)
             self.ui.AppsMonitored.setText(str(apps))
 
     def update_scroll(self):
