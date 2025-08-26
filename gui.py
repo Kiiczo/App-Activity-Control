@@ -62,7 +62,7 @@ class Ui_MainWindow(object):
         self.label.setLineWidth(2)
         self.Applications = QLabel(self.central)
         self.Applications.setObjectName(u"Applications")
-        self.Applications.setGeometry(QRect(400, 330, 921, 31))
+        self.Applications.setGeometry(QRect(407, 330, 884, 31))
         self.Applications.setStyleSheet(u"QLabel {\n"
 "    color: rgb(255, 255, 255);\n"
 "	font-family: 'Inter';\n"
@@ -104,6 +104,6 @@ class Ui_MainWindow(object):
         self.reportsBtn.setText(QCoreApplication.translate("MainWindow", u"Reports", None))
         self.apptimersBtn.setText(QCoreApplication.translate("MainWindow", u"App Timers", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Loading", None))
-        self.Applications.setText(QCoreApplication.translate("MainWindow", u"Application", None))
+        self.Applications.setText(QCoreApplication.translate("MainWindow", u"   Application                                                                                                                                                                    Today", None))
     # retranslateUi
 
