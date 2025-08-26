@@ -66,7 +66,9 @@ class MainWindow(QMainWindow):
         if today in df.index:
             value = df.loc[today, "system"]
             value = sec_to_time(value)
+            apps = df.loc[today, "apps_amount"]
             self.ui.label.setText(value)
+            self.ui.AppsMonitored.setText(str(apps))
 
     def update_scroll(self):
         df = pd.read_csv("dane.csv", index_col=0)

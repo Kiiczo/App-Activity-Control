@@ -90,6 +90,16 @@ class Ui_MainWindow(object):
 "    background-color: rgba(0, 0, 0,0);\n"
 "}")
         self.AppScrollArea.setWidget(self.AppScrollWidget)
+        self.AppsMonitored = QLabel(self.central)
+        self.AppsMonitored.setObjectName(u"AppsMonitored")
+        self.AppsMonitored.setGeometry(QRect(1000, 185, 271, 50))
+        self.AppsMonitored.setStyleSheet(u"QLabel {\n"
+"    color: rgb(255, 255, 255);\n"
+"	font-size: 35px;\n"
+"    font-family: 'Inter';\n"
+"}\n"
+"")
+        self.AppsMonitored.setLineWidth(2)
         MainWindow.setCentralWidget(self.central)
 
         self.retranslateUi(MainWindow)
@@ -105,5 +115,6 @@ class Ui_MainWindow(object):
         self.apptimersBtn.setText(QCoreApplication.translate("MainWindow", u"App Timers", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Loading", None))
         self.Applications.setText(QCoreApplication.translate("MainWindow", u"   Application                                                                                                                                                                    Today", None))
+        self.AppsMonitored.setText(QCoreApplication.translate("MainWindow", u"Loading", None))
     # retranslateUi
 
