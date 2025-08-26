@@ -72,6 +72,6 @@ class Ui_MainWindow(object):
         self.dashboardBtn.setText(QCoreApplication.translate("MainWindow", u"Dashboard", None))
         self.reportsBtn.setText(QCoreApplication.translate("MainWindow", u"Reports", None))
         self.apptimersBtn.setText(QCoreApplication.translate("MainWindow", u"App Timers", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"testvalue", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"Loading", None))
     # retranslateUi
 
