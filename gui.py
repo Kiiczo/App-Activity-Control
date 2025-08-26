@@ -69,12 +69,6 @@ class Ui_MainWindow(object):
 "    background-color: rgba(33, 22, 74, 0);\n"
 "	font-size: 16px\n"
 "}\n"
-"\n"
-"QLabel:hover {\n"
-"	font-family: 'Inter';\n"
-"    background-color: rgb(56, 52, 132);\n"
-"    color: white;\n"
-"}\n"
 "")
         self.AppScrollArea = QScrollArea(self.central)
         self.AppScrollArea.setObjectName(u"AppScrollArea")

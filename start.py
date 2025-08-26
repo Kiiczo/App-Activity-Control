@@ -44,16 +44,22 @@ class MainWindow(QMainWindow):
         self.ui.label.show()
         self.ui.AppScrollArea.show()
         self.update_scroll()
+        self.ui.AppsMonitored.show()
+        self.ui.Applications.show()
 
     def show_reports(self):
         self.ui.Dashboard.setPixmap(QPixmap("Reports.png"))
         self.ui.label.hide()
         self.ui.AppScrollArea.hide()
+        self.ui.AppsMonitored.hide()
+        self.ui.Applications.hide()
 
     def show_apptimers(self):
         self.ui.Dashboard.setPixmap(QPixmap("AppTimers.png"))
         self.ui.label.hide()
         self.ui.AppScrollArea.hide()
+        self.ui.AppsMonitored.hide()
+        self.ui.Applications.hide()
 
     def timerEvent(self, event):
         self.update_label()
