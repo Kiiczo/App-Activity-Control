@@ -104,6 +104,30 @@ class Ui_MainWindow(object):
 "}\n"
 "")
         self.MostUsedApp.setLineWidth(2)
+        self.MostScrollArea = QScrollArea(self.central)
+        self.MostScrollArea.setObjectName(u"MostScrollArea")
+        self.MostScrollArea.setGeometry(QRect(1440, 360, 391, 621))
+        self.MostScrollArea.setStyleSheet(u"QScrollArea {\n"
+"    background-color: rgba(120, 255, 90,0);\n"
+"}")
+        self.MostScrollArea.setWidgetResizable(True)
+        self.AppScrollWidget_2 = QWidget()
+        self.AppScrollWidget_2.setObjectName(u"AppScrollWidget_2")
+        self.AppScrollWidget_2.setGeometry(QRect(0, 0, 389, 619))
+        self.AppScrollWidget_2.setStyleSheet(u"QWidget {\n"
+"    background-color: rgba(0, 0, 0,0);\n"
+"}")
+        self.MostScrollArea.setWidget(self.AppScrollWidget_2)
+        self.ApplicationsTime = QLabel(self.central)
+        self.ApplicationsTime.setObjectName(u"ApplicationsTime")
+        self.ApplicationsTime.setGeometry(QRect(1440, 330, 381, 31))
+        self.ApplicationsTime.setStyleSheet(u"QLabel {\n"
+"    color: rgb(255, 255, 255);\n"
+"	font-family: 'Inter';\n"
+"    background-color: rgba(33, 22, 74, 0);\n"
+"	font-size: 16px\n"
+"}\n"
+"")
         MainWindow.setCentralWidget(self.central)
 
         self.retranslateUi(MainWindow)
@@ -121,5 +145,6 @@ class Ui_MainWindow(object):
         self.Applications.setText(QCoreApplication.translate("MainWindow", u"   Application                                                                                                                                                                    Today", None))
         self.AppsMonitored.setText(QCoreApplication.translate("MainWindow", u"Loading", None))
         self.MostUsedApp.setText(QCoreApplication.translate("MainWindow", u"Loading", None))
+        self.ApplicationsTime.setText(QCoreApplication.translate("MainWindow", u"Application                                           All Time", None))
     # retranslateUi
 

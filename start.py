@@ -31,6 +31,10 @@ class MainWindow(QMainWindow):
         self.scroll_layout.setSpacing(5)
         self.scroll_layout.setContentsMargins(5, 5, 5, 5)
 
+        self.scroll_most = QVBoxLayout(self.ui.AppScrollWidget_2)
+        self.scroll_most.setSpacing(5)
+        self.scroll_most.setContentsMargins(5, 5, 5, 5)
+
         self.timer = self.startTimer(1000)
 
         self.ui.dashboardBtn.clicked.connect(self.show_dashboard)
@@ -44,6 +48,7 @@ class MainWindow(QMainWindow):
         self.ui.label.show()
         self.ui.AppScrollArea.show()
         self.update_scroll()
+        self.update_apptimers()
         self.ui.AppsMonitored.show()
         self.ui.Applications.show()
 
@@ -65,6 +70,7 @@ class MainWindow(QMainWindow):
         self.update_label()
         if self.ui.AppScrollArea.isVisible():
             self.update_scroll()
+            self.update_apptimers()
 
     def update_label(self):
         df = pd.read_csv("dane.csv", index_col=0)
@@ -76,7 +82,6 @@ class MainWindow(QMainWindow):
             maxApp = df.loc[today].idxmax()
             self.ui.label.setText(value)
             self.ui.MostUsedApp.setText(str(maxApp))
-            print(maxApp)
             self.ui.AppsMonitored.setText(str(apps))
 
     def update_scroll(self):
@@ -118,6 +123,47 @@ class MainWindow(QMainWindow):
             self.scroll_layout.addWidget(label)
 
         self.scroll_layout.addStretch()
+
+    def update_apptimers(self):
+        df = pd.read_csv("dane.csv", index_col=0)
+        today = datetime.today().strftime('%Y-%m-%d')
+        if today not in df.index:
+            return
+
+        for i in reversed(range(self.scroll_most.count())):
+            widget = self.scroll_most.itemAt(i).widget()
+            if widget:
+                widget.deleteLater()
+
+        app_times = {
+            col: df[col].sum()
+            for col in df.columns if col != "system" and df.loc[today, col] > 0
+        }
+        sorted_apps = sorted(app_times.items(), key=lambda x: x[1], reverse=True)
+
+        for col, value in sorted_apps:
+            label = QLabel(f"{col}{" " * (26 - len(col))}{sec_to_time(value)}")
+            label.setStyleSheet("""
+                        QLabel {
+                            color: white;
+                            font-family: 'Monospace';
+                            background-color: rgba(33, 22, 74, 0);
+                            font-size: 16px;
+                            padding: 5px;
+                            border-top: 1px solid rgb(92, 93, 126);
+                        }
+                        QLabel:hover {
+                            background-color: rgb(56, 52, 132);
+                            color: white;
+                            border-top: 1px solid rgb(92, 93, 126);
+                        }
+                    """)
+            label.setFixedHeight(40)
+            label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+            self.scroll_most.addWidget(label)
+
+        self.scroll_most.addStretch()
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
