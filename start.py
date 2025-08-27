@@ -43,28 +43,35 @@ class MainWindow(QMainWindow):
 
         self.show_dashboard()
 
+    def dashboard_widget(self, action):
+        widgets = [
+            self.ui.label,
+            self.ui.AppScrollArea,
+            self.ui.AppsMonitored,
+            self.ui.Applications,
+            self.ui.MostScrollArea,
+            self.ui.MostUsedApp,
+            self.ui.ApplicationsTime
+        ]
+
+        for w in widgets:
+            if action == "show":
+                w.show()
+            elif action == "hide":
+                w.hide()
+
     def show_dashboard(self):
         self.ui.Dashboard.setPixmap(QPixmap("Dashboard.png"))
-        self.ui.label.show()
-        self.ui.AppScrollArea.show()
         self.update_scroll()
         self.update_apptimers()
-        self.ui.AppsMonitored.show()
-        self.ui.Applications.show()
-
+        self.dashboard_widget("show")
     def show_reports(self):
         self.ui.Dashboard.setPixmap(QPixmap("Reports.png"))
-        self.ui.label.hide()
-        self.ui.AppScrollArea.hide()
-        self.ui.AppsMonitored.hide()
-        self.ui.Applications.hide()
+        self.dashboard_widget("hide")
 
     def show_apptimers(self):
         self.ui.Dashboard.setPixmap(QPixmap("AppTimers.png"))
-        self.ui.label.hide()
-        self.ui.AppScrollArea.hide()
-        self.ui.AppsMonitored.hide()
-        self.ui.Applications.hide()
+        self.dashboard_widget("hide")
 
     def timerEvent(self, event):
         self.update_label()
