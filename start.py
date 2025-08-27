@@ -109,7 +109,7 @@ class MainWindow(QMainWindow):
         sorted_apps = sorted(app_times.items(), key=lambda x: x[1], reverse=True)
 
         for col, value in sorted_apps:
-            label = QLabel(f"{col}{" "*(80-len(col))}{sec_to_time(value)}")
+            label = QLabel(f"{col}{" "*(60-len(col))}{sec_to_time(value)}")
             label.setStyleSheet("""
                 QLabel {
                     color: white;
