@@ -24,7 +24,7 @@ def current_procces():
     return sorted(list(apps))
 
 
-def time_counting():
+def time_counting(df, today):
     apps = current_procces()
     for i in apps:
         if i not in df.columns:
@@ -45,24 +45,26 @@ def time_counting():
     else:
         df.loc[today, 'apps_amount'] = len(apps)
 
-def save_data():
+def save_data(df):
     df.to_csv("dane.csv")
 
-today = datetime.today().strftime('%Y-%m-%d')
+def track():
 
-try:
-    df = pd.read_csv("dane.csv", index_col=0)
-except FileNotFoundError:
-    df = pd.DataFrame()
-
-counter = 0
-save_time = 1
-
-while True:
     today = datetime.today().strftime('%Y-%m-%d')
-    time_counting()
-    counter += 1
-    if counter == save_time:
-        counter = 0
-        save_data()
-    time.sleep(1)
+
+    try:
+        df = pd.read_csv("dane.csv", index_col=0)
+    except FileNotFoundError:
+        df = pd.DataFrame()
+
+    counter = 0
+    save_time = 1
+
+    while True:
+        today = datetime.today().strftime('%Y-%m-%d')
+        time_counting(df, today)
+        counter += 1
+        if counter == save_time:
+            counter = 0
+            save_data(df)
+        time.sleep(1)

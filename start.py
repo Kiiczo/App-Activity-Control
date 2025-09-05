@@ -5,8 +5,19 @@ from PySide6.QtWidgets import (
 from PySide6.QtGui import QPixmap
 from datetime import datetime
 import pandas as pd
-
+from main import track
+import threading
 from gui import Ui_MainWindow
+
+def clear_layout(layout):
+    while layout.count():
+        item = layout.takeAt(0)
+        w = item.widget()
+        child_layout = item.layout()
+        if w is not None:
+            w.deleteLater()
+        elif child_layout is not None:
+            clear_layout(child_layout)
 
 def sec_to_time(sec: int) -> str:
     if sec < 60:
@@ -97,34 +108,31 @@ class MainWindow(QMainWindow):
         if today not in df.index:
             return
 
-        for i in reversed(range(self.scroll_layout.count())):
-            widget = self.scroll_layout.itemAt(i).widget()
-            if widget:
-                widget.deleteLater()
+        clear_layout(self.scroll_layout)
 
         app_times = {
             col: df.loc[today, col]
-            for col in df.columns if col != "system" and df.loc[today, col] > 0
+            for col in df.columns if col != "system" and df.loc[today, col] != 0
         }
         sorted_apps = sorted(app_times.items(), key=lambda x: x[1], reverse=True)
 
         for col, value in sorted_apps:
-            label = QLabel(f"{col}{" "*(60-len(col))}{sec_to_time(value)}")
+            label = QLabel(f"{col}{" " * (60 - len(col))}{sec_to_time(value)}")
             label.setStyleSheet("""
-                QLabel {
-                    color: white;
-                    font-family: 'Monospace';
-                    background-color: rgba(33, 22, 74, 0);
-                    font-size: 16px;
-                    padding: 5px;
-                    border-top: 1px solid rgb(92, 93, 126);
-                }
-                QLabel:hover {
-                    background-color: rgb(56, 52, 132);
-                    color: white;
-                    border-top: 1px solid rgb(92, 93, 126);
-                }
-            """)
+                                QLabel {
+                                    color: white;
+                                    font-family: 'Monospace';
+                                    background-color: rgba(33, 22, 74, 0);
+                                    font-size: 16px;
+                                    padding: 5px;
+                                    border-top: 1px solid rgb(92, 93, 126);
+                                }
+                                QLabel:hover {
+                                    background-color: rgb(56, 52, 132);
+                                    color: white;
+                                    border-top: 1px solid rgb(92, 93, 126);
+                                }
+                            """)
             label.setFixedHeight(40)
             label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
             self.scroll_layout.addWidget(label)
@@ -137,14 +145,11 @@ class MainWindow(QMainWindow):
         if today not in df.index:
             return
 
-        for i in reversed(range(self.scroll_most.count())):
-            widget = self.scroll_most.itemAt(i).widget()
-            if widget:
-                widget.deleteLater()
+        clear_layout(self.scroll_most)
 
         app_times = {
             col: df[col].sum()
-            for col in df.columns if col != "system" and df.loc[today, col] > 0
+            for col in df.columns if col != "system" and df[col].sum() > 0
         }
         sorted_apps = sorted(app_times.items(), key=lambda x: x[1], reverse=True)
 
@@ -173,6 +178,9 @@ class MainWindow(QMainWindow):
 
 
 if __name__ == "__main__":
+    t = threading.Thread(target=track, daemon=True)
+    t.start()
+
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
